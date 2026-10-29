@@ -34,6 +34,16 @@ public class Exercicio {
     private boolean ativo;
 
     public Exercicio(CadastrarExercicio dados) {
+        this.ativo = true;
+        this.data = dados.data();
+        this.nome = dados.nome();
+        this.series = dados.series();
+        this.repeticao = dados.repeticao();
+        this.carga = dados.carga();
+        this.tempo = LocalTime.from(LocalTime.parse(dados.tempo().format(DateTimeFormatter.ofPattern("HH:mm"))));
+    }
+
+    public void atualizarExercicio(AtualizarExercicio dados) {
         this.data = dados.data();
         this.nome = dados.nome();
         this.series = dados.series();
@@ -45,4 +55,6 @@ public class Exercicio {
     public void excluir() {
         this.ativo = false;
     }
+
+
 }

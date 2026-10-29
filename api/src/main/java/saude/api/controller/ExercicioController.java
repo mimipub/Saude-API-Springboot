@@ -30,9 +30,10 @@ public class ExercicioController {
     @PutMapping
     public void atualizarExercicio(@RequestBody AtualizarExercicio dados) {
         var exercicio = exercicioRepository.getReferenceById(dados.id());
-        atualizarExercicio(dados);
+        exercicio.atualizarExercicio(dados);
     }
 
+    @DeleteMapping("/{id}")
     public void excluirExercicio(@PathVariable Long id) {
         var exercicio = exercicioRepository.getReferenceById(id);
         exercicio.excluir();

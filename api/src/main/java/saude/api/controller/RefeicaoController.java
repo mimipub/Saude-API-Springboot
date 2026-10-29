@@ -28,8 +28,8 @@ public class RefeicaoController {
 
     @PutMapping
     public void atualizarRefeicao(@RequestBody AtualizarRefeicao dados) {
-        var exercicio = refeicaoRepository.getReferenceById(dados.id());
-        exercicio.atualizarInformacoes(dados);
+        var refeicao = refeicaoRepository.getReferenceById(dados.id());
+        refeicao.atualizarInformacoes(dados);
     }
 
     @DeleteMapping("/{id}")
