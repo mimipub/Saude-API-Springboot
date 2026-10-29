@@ -1,0 +1,296 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Gerenciamento de Saúde Diária</title>-->
+<!--    <link rel="stylesheet" href="/css/crud-style.css" th:href="@{css/crud-style.css}">-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<main>-->
+
+
+<!--    <nav>-->
+<!--        <div class="menu">-->
+
+<!--            <header>-->
+<!--                <div class="logo">-->
+<!--                    <img class="logo2" src="img/logo.png" alt="Logo do Site">-->
+<!--                </div>-->
+
+<!--            </header>-->
+
+<!--            <ul>-->
+<!--                <li><a href="#exercicios">Exercícios</a></li>-->
+<!--                <li><a href="#refeicoes">Refeições</a></li>-->
+<!--                <li><a href="#sono">Sono</a></li>-->
+<!--                <li><a href="#relatorio">Relatório</a></li>-->
+<!--            </ul>-->
+<!--        </div>-->
+
+<!--    </nav>-->
+
+<!--    <section id="exercicios">-->
+<!--        <div class="teste">-->
+<!--&lt;!&ndash;            <h2>Exercícios</h2>&ndash;&gt;-->
+<!--            <button class="btn-ad" onclick="openForm('exercicioForm')">Adicionar Exercício</button>-->
+<!--        </div>-->
+<!--        <table>-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>Data</th>-->
+<!--                <th>Exercício</th>-->
+<!--                <th>Séries</th>-->
+<!--                <th>Repetições</th>-->
+<!--                <th>Carga</th>-->
+<!--                <th>Tempo</th>-->
+<!--                <th>Ações</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr th:each="exercicio : ${exercicios}">-->
+<!--                <td th:text="${exercicio.data}">Data</td>-->
+<!--                <td th:text="${exercicio.nome}">Nome do Exercício</td>-->
+<!--                <td th:text="${exercicio.series}">Quantidade de Séries</td>-->
+<!--                <td th:text="${exercicio.repeticoes}">Quantidade de Repetições</td>-->
+<!--                <td th:text="${exercicio.carga}">Quantidade de Carga</td>-->
+<!--                <td th:text="${exercicio.tempo}">Duração</td>-->
+
+<!--                <td>-->
+<!--                    <a href="javascript:void(0);"-->
+<!--                       class="btn"-->
+<!--                       th:attr="data-id=${exercicio.id},-->
+<!--                              data-data=${exercicio.data},-->
+<!--                              data-nome=${exercicio.nome},-->
+<!--                              data-series=${exercicio.series},-->
+<!--                              data-repeticoes=${exercicio.repeticoes},-->
+<!--                              data-carga=${exercicio.carga},-->
+<!--                              data-tempo=${exercicio.tempo}"-->
+<!--                       onclick="editExercicio(this)">-->
+<!--                        Editar-->
+<!--                    </a>-->
+<!--                    <a th:href="@{'/exercicio/excluir/' + ${exercicio.id}}" class="btn" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </section>-->
+
+
+<!--    <section id="refeicoes">-->
+<!--        <div class="teste">-->
+<!--            <h2>Refeições</h2>-->
+<!--            <button class="btn-ad" onclick="openForm('refeicaoForm')">Adicionar Refeição</button>-->
+<!--        </div>-->
+<!--        <table>-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>Data</th>-->
+<!--                <th>Tipo de refeição</th>-->
+<!--                <th>Descrição</th>-->
+<!--                <th>Calorias</th>-->
+<!--                <th>Ações</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr>-->
+<!--                <td>Data</td>-->
+<!--                <td>Tipo da Refeição</td>-->
+<!--                <td>Descrição da Refeição</td>-->
+<!--                <td>Calorias</td>-->
+<!--                <td>-->
+<!--                    <a class="btn">Editar</a>-->
+<!--                    <a class="btn" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </section>-->
+
+
+<!--    <section id="sono">-->
+<!--        <div class="teste">-->
+<!--            <h2>Sono</h2>-->
+<!--            <button class="btn-ad" onclick="openForm('sonoForm')">Adicionar Registro de Sono</button>-->
+<!--        </div>-->
+<!--        <table>-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>Data</th>-->
+<!--                <th>Quantidade de Horas</th>-->
+<!--                <th>Qualidade</th>-->
+<!--                <th>Ações</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr>-->
+<!--                <td>Data</td>-->
+<!--                <td>Quantidade de Horas</td>-->
+<!--                <td>Qualidade</td>-->
+<!--                <td>-->
+<!--                    <a class="btn">Editar</a>-->
+<!--                    <a class="btn" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </section>-->
+
+
+<!--    </section>-->
+
+<!--    &lt;!&ndash; Formulários de Adição &ndash;&gt;-->
+
+<!--    <div class="form-popup" id="sonoForm">-->
+<!--        <form action="/sono/salvar" method="post" class="form-container">-->
+<!--            <h2>Adicionar Registro de Sono</h2>-->
+
+<!--            <label for="horasDormidas">Horas Dormidas:</label>-->
+<!--            <input type="number" id="horasDormidas" name="horasDormidas" required>-->
+
+<!--            <label for="qualidade">Qualidade:</label>-->
+<!--            <input type="text" id="qualidade" name="qualidade" required>-->
+
+<!--            <label for="data">Data:</label>-->
+<!--            <input type="date" id="data" name="data" required>-->
+
+<!--            <button type="submit" class="btn">Salvar</button>-->
+<!--            <button type="button" class="btn cancel" onclick="closeForm('sonoForm')">Fechar</button>-->
+<!--        </form>-->
+<!--    </div>-->
+
+<!--    <div class="form-popup" id="exercicioForm">-->
+<!--        <form action="/exercicio/salvar" method="post" th:object="${exercicio}" class="form-container">-->
+<!--            <h2 th:text="${exercicio.id != null ? 'Editar Exercício' : 'Adicionar Exercício'}">Adicionar Exercício</h2>-->
+
+<!--            <label for="data">Data:</label>-->
+<!--            <input type="date" id="data" th:field="*{data}" required>-->
+
+<!--            <label for="nome">Nome:</label>-->
+<!--            <input type="text" id="nome" th:field="*{nome}" required>-->
+
+<!--            <label for="series">Quantidade de Séries:</label>-->
+<!--            <input type="number" id="series" th:field="*{series}" required>-->
+
+<!--            <label for="repeticoes">Quantidade de Repetições:</label>-->
+<!--            <input type="number" id="repeticoes" th:field="*{repeticoes}" required>-->
+
+<!--            <label for="carga">Carga (kg):</label>-->
+<!--            <input type="number" id="carga" th:field="*{carga}" step="0.1" required>-->
+
+<!--            <label for="tempo">Duração (min):</label>-->
+<!--            <input type="number" id="tempo" th:field="*{tempo}" required>-->
+
+<!--            <button type="submit" class="btn">Salvar</button>-->
+<!--            <button type="button" class="btn cancel" onclick="closeForm('exercicioForm')">Fechar</button>-->
+<!--        </form>-->
+<!--    </div>-->
+
+
+<!--    <div class="form-popup" id="refeicaoForm">-->
+<!--        <form action="/refeicao/salvar" method="post" th:object="${refeicoes}" class="form-container">-->
+<!--            <h2 th:text="${refeicao.id != null ? 'Editar Refeição' : 'Adicionar Refeição'}">Adicionar Refeição</h2>-->
+
+<!--            <label for="tipo">Tipo de Refeição:</label>-->
+<!--            <input type="text" id="tipo" th:field="*{tipo}" required>-->
+
+<!--            <label for="nome">Descrição da Refeição:</label>-->
+<!--            <input type="text" id="nome" th:field="*{nome}" required>-->
+
+
+<!--            <label for="quantidade">Quantidade de Calorias:</label>-->
+<!--            <input type="number" id="quantidade" th:field="*{quantidade}" required>-->
+
+<!--            <label for="data">Data:</label>-->
+<!--            <input type="date" id="data" th:field="*{data}" required>-->
+
+<!--            <button type="submit" class="btn">Salvar</button>-->
+<!--            <button type="button" class="btn cancel" onclick="closeForm('refeicaoForm')">Fechar</button>-->
+<!--        </form>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Formulários de Edição &ndash;&gt;-->
+<!--    <div class="form-popup" id="editarExercicioForm">-->
+<!--        <form method="post" class="form-container">-->
+<!--            <input type="hidden" id="id" name="id">-->
+
+<!--            <label for="data">Data:</label>-->
+<!--            <input type="date" id="data" name="data" required>-->
+
+<!--            <label for="nome">Nome:</label>-->
+<!--            <input type="text" id="nome" name="nome" required>-->
+
+<!--            <label for="series">Quantidade de Séries:</label>-->
+<!--            <input type="number" id="series" name="series" required>-->
+
+<!--            <label for="repeticoes">Quantidade de Repetições:</label>-->
+<!--            <input type="number" id="repeticoes" name="repeticoes" required>-->
+
+<!--            <label for="carga">Carga (kg):</label>-->
+<!--            <input type="number" id="carga" name="carga" step="0.1" required>-->
+
+<!--            <label for="tempo">Duração (min):</label>-->
+<!--            <input type="number" id="tempo" name="tempo" required>-->
+
+<!--            <button type="submit" class="btn">Salvar</button>-->
+<!--            <button type="button" class="btn cancel" onclick="closeForm('editarExercicioForm')">Cancelar</button>-->
+<!--        </form>-->
+<!--    </div>-->
+
+
+<!--</main>-->
+
+<!--<script>-->
+<!--    function openForm(formId) {-->
+<!--        document.getElementById(formId).style.display = "block";-->
+<!--    }-->
+
+<!--    function closeForm(formId) {-->
+<!--        document.getElementById(formId).style.display = "none";-->
+<!--    }-->
+
+<!--    function editExercicio(element) {-->
+<!--        openForm('editarExercicioForm');-->
+<!--        const id = element.getAttribute("data-id");-->
+<!--        const data = element.getAttribute("data-data");-->
+<!--        const nome = element.getAttribute("data-nome");-->
+<!--        const series = element.getAttribute("data-series");-->
+<!--        const repeticoes = element.getAttribute("data-repeticoes");-->
+<!--        const carga = element.getAttribute("data-carga");-->
+<!--        const tempo = element.getAttribute("data-tempo");-->
+
+<!--        document.getElementById("editarExercicioForm").innerHTML = `-->
+<!--              <form method="post" class="form-container" action="/exercicio/editar/${id}">-->
+<!--                  <input type="hidden" name="id" value="${id}">-->
+
+<!--                  <label for="data">Data:</label>-->
+<!--                  <input type="date" id="data" name="data" value="${data}" required>-->
+
+<!--                  <label for="nome">Nome:</label>-->
+<!--                  <input type="text" id="nome" name="nome" value="${nome}" required>-->
+
+<!--                  <label for="series">Quantidade de Séries:</label>-->
+<!--                  <input type="number" id="series" name="series" value="${series}" required>-->
+
+<!--                  <label for="repeticoes">Quantidade de Repetições:</label>-->
+<!--                  <input type="number" id="repeticoes" name="repeticoes" value="${repeticoes}" required>-->
+
+<!--                  <label for="carga">Carga (kg):</label>-->
+<!--                  <input type="number" id="carga" name="carga" value="${carga}" step="0.1" required>-->
+
+<!--                  <label for="tempo">Duração (min):</label>-->
+<!--                  <input type="number" id="tempo" name="tempo" value="${tempo}" required>-->
+
+<!--                  <button type="submit" class="btn">Salvar</button>-->
+<!--                  <button type="button" class="btn cancel" onclick="closeForm('editarExercicioForm')">Cancelar</button>-->
+<!--              </form>-->
+<!--          `;-->
+<!--        document.querySelector("#editarExercicioForm form").setAttribute("action", `/exercicio/editar/${id}`);-->
+<!--    }-->
+
+<!--</script>-->
+
+
+<!--</body>-->
+<!--</html>-->
